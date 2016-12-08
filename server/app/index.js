@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 var app = require('express')();
 var path = require('path');
@@ -24,6 +24,10 @@ app.use(function (req, res, next) {
   console.log('session', req.session);
   next();
 });
+app.use(session({
+  // this mandatory configuration ensures that session IDs are not predictable
+  secret: 'Biscool' // or whatever you like
+}));
 
 app.use('/api', require('../api/api.router'));
 
